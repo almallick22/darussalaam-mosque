@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate - Darus Salaam Mosque</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Donation page specific styles */
+    .donation-page {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      background: linear-gradient(160deg, #f8f4ef 0%, #ece6dc 100%);
+    }
+
+    .donation-card {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      padding: 50px 40px;
+      border-radius: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(184, 148, 62, 0.15);
+      text-align: center;
+    }
+
+    .donation-card h1 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .donation-card .subtitle {
+      color: #6a7f72;
+      font-size: 1rem;
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--gold-light);
+      padding-bottom: 20px;
+    }
+
+    .bank-details {
+      text-align: left;
+      margin: 24px 0 32px 0;
+    }
+
+    .bank-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(184, 148, 62, 0.1);
+    }
+
+    .bank-row:last-child {
+      border-bottom: none;
+    }
+
+    .bank-label {
+      color: #3c5446;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .bank-value {
+      color: #1f2e26;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .bank-value.ref {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .btn-back {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 12px 36px;
+      border-radius: 60px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    .btn-back:hover {
+      background: #1f4a3a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(43, 94, 75, 0.3);
+    }
+
+    .btn-back i {
+      margin-right: 10px;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #6a7f72;
+      margin-top: 24px;
+      font-style: italic;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .donation-card {
+        padding: 30px 20px;
+      }
+
+      .donation-card h1 {
+        font-size: 1.6rem;
+      }
+
+      .bank-row {
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px 0;
+      }
+
+      .bank-value {
+        text-align: left;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== DONATION PAGE ===== -->
+  <section class="donation-page">
+    <div class="donation-card">
+      <h1>Support Darus Salaam Mosque</h1>
+      <p class="subtitle">Your generosity helps us serve the community</p>
+
+      <p style="text-align: center; color: #3c5446; font-size: 1.05rem; margin-bottom: 20px;">
+        You can transfer your donation directly to the bank:
+      </p>
+
+      <div class="bank-details">
+        <div class="bank-row">
+          <span class="bank-label">Bank Name</span>
+          <span class="bank-value">Al Rayan</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Account Name</span>
+          <span class="bank-value">Islamic Forum Trust</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Account Number</span>
+          <span class="bank-value">01025501</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Sort Code</span>
+          <span class="bank-value">30-00-83</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Reference</span>
+          <span class="bank-value ref">Darus Salaam</span>
+        </div>
+      </div>
+
+      <a href="index.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+
+      <p class="note">Jazakallah Khair for your generous support</p>
+    </div>
+  </section>
+
+</body>
+</html>

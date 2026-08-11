@@ -1,0 +1,17 @@
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "settings"
+    label: "Settings"
+    files:
+      - file: "data.json"
+        label: "Floating Message"
+        name: "floating-message"
+        fields:
+          - { label: "Floating Message", name: "floatingMessage", widget: "string", default: "Masjid construction is in progress", required: true }
