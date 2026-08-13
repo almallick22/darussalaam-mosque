@@ -1,4 +1,3 @@
-
 backend:
   name: git-gateway
   branch: main
@@ -14,28 +13,8 @@ collections:
         label: "Floating Message"
         name: "floating-message"
         fields:
-          - { label: "Floating Message", name: "floatingMessage", widget: "string", default: "Masjid construction is in progress", required: true }
-
-
-          backend:
-  name: git-gateway
-  branch: main
-
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
-
-collections:
-  # ===== FLOATING MESSAGE SETTINGS =====
-  - name: "settings"
-    label: "Settings"
-    files:
-      - file: "data.json"
-        label: "Floating Message"
-        name: "floating-message"
-        fields:
           - { label: "Floating Message", name: "floatingMessage", widget: "string", default: "Welcome to Darus Salaam Mosque", required: true }
 
-  # ===== UPDATES / NEWS =====
   - name: "updates"
     label: "Updates"
     folder: "content/updates"
@@ -46,8 +25,5 @@ collections:
       - { label: "Date", name: "date", widget: "datetime", required: true }
       - { label: "Description", name: "description", widget: "text", required: true }
       - { label: "Type", name: "type", widget: "select", options: ["text", "video", "pdf"], default: "text", required: true }
-      - { label: "YouTube URL", name: "youtubeUrl", widget: "string", required: false, hint: "Only for video type" }
-      - { label: "PDF File", name: "file", widget: "file", required: false, hint: "Only for PDF type" }
-
-
-      
+      - { label: "YouTube URL", name: "youtubeUrl", widget: "string", required: false }
+      - { label: "PDF File", name: "file", widget: "file", required: false }
