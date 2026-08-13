@@ -209,106 +209,107 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    // Load updates from data.json or CMS
-    function loadUpdates() {
+   <script>
+    // ============================================================
+    // LOAD UPDATES FROM CMS (content/updates/*.md)
+    // ============================================================
+    async function loadUpdates() {
       const grid = document.getElementById('updatesGrid');
       const loadingMsg = document.getElementById('loadingMessage');
 
-      // Sample data - will be replaced by CMS later
-      const updates = [
-        // These will come from CMS/JSON
-        // Example structure:
-        // {
-        //   title: "Ramadan Timetable 2026",
-        //   date: "2026-03-01",
-        //   description: "Download our Ramadan prayer timetable for the month of fasting.",
-        //   type: "pdf",
-        //   file: "Ramadan-Timetable-2026.pdf",
-        //   youtubeUrl: ""
-        // },
-        // {
-        //   title: "Watch Our Latest Lecture",
-        //   date: "2026-02-15",
-        //   description: "The Importance of Community in Islam",
-        //   type: "video",
-        //   youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID",
-        //   file: ""
-        // },
-        // {
-        //   title: "Community Iftar Announcement",
-        //   date: "2026-01-20",
-        //   description: "Join us for Iftar every evening at 7:00 PM during Ramadan.",
-        //   type: "text",
-        //   youtubeUrl: "",
-        //   file: ""
-        // }
-      ];
+      try {
+        // Fetch the list of update files from the CMS folder
+        const response = await fetch('/content/updates/index.json');
+        if (!response.ok) {
+          throw new Error('No updates found');
+        }
+        const files = await response.json();
 
-      // If no updates yet, show a message
-      if (updates.length === 0) {
+        if (files.length === 0) {
+          grid.innerHTML = `
+            <div class="no-updates">
+              <i class="fas fa-newspaper"></i>
+              No updates yet. Check back soon!
+            </div>
+          `;
+          return;
+        }
+
+        // Load each update file
+        const updates = [];
+        for (const file of files) {
+          const res = await fetch(`/content/updates/${file}`);
+          const data = await res.json();
+          updates.push(data);
+        }
+
+        // Sort by date (newest first)
+        updates.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Clear loading message
+        grid.innerHTML = '';
+
+        // Render each update
+        updates.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'update-card';
+
+          let mediaContent = '';
+          if (item.type === 'video' && item.youtubeUrl) {
+            const videoId = extractYouTubeId(item.youtubeUrl);
+            if (videoId) {
+              mediaContent = `
+                <div class="video-wrapper">
+                  <iframe src="https://www.youtube.com/embed/${videoId}" 
+                          allowfullscreen>
+                  </iframe>
+                </div>
+              `;
+            }
+          }
+
+          let actionButton = '';
+          if (item.type === 'pdf' && item.file) {
+            actionButton = `
+              <a href="${item.file}" download class="btn-download">
+                <i class="fas fa-file-pdf"></i> Download PDF
+              </a>
+            `;
+          }
+
+          const dateObj = new Date(item.date);
+          const formattedDate = dateObj.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          });
+
+          card.innerHTML = `
+            ${mediaContent}
+            <div class="card-date">📅 ${formattedDate}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            ${actionButton}
+          `;
+
+          grid.appendChild(card);
+        });
+
+      } catch (error) {
+        console.log('ℹ️ No updates found in CMS. Showing placeholder.');
         grid.innerHTML = `
           <div class="no-updates">
             <i class="fas fa-newspaper"></i>
             No updates yet. Check back soon!
           </div>
         `;
-        return;
       }
-
-      // Clear loading message
-      grid.innerHTML = '';
-
-      // Render each update card
-      updates.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'update-card';
-
-        let mediaContent = '';
-        if (item.type === 'video' && item.youtubeUrl) {
-          const videoId = extractYouTubeId(item.youtubeUrl);
-          if (videoId) {
-            mediaContent = `
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/${videoId}" 
-                        allowfullscreen>
-                </iframe>
-              </div>
-            `;
-          }
-        }
-
-        let actionButton = '';
-        if (item.type === 'pdf' && item.file) {
-          actionButton = `
-            <a href="${item.file}" download class="btn-download">
-              <i class="fas fa-file-pdf"></i> Download PDF
-            </a>
-          `;
-        }
-
-        const dateObj = new Date(item.date);
-        const formattedDate = dateObj.toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric'
-        });
-
-        card.innerHTML = `
-          ${mediaContent}
-          <div class="card-date">📅 ${formattedDate}</div>
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          ${actionButton}
-        `;
-
-        grid.appendChild(card);
-      });
     }
 
     // Helper function to extract YouTube video ID
     function extractYouTubeId(url) {
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      if (!url) return null;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#\&\?]*).*/;
       const match = url.match(regExp);
       if (match && match[2].length === 11) {
         return match[2];
