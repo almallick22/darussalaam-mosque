@@ -71,3 +71,22 @@ if (backToTopBtn) {
   });
 }
 
+
+// ============================================================
+// NAVIGATION - Mobile Toggle
+// ============================================================
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('active');
+  });
+
+  // Close menu when a link is clicked (mobile)
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('active');
+    });
+  });
+}

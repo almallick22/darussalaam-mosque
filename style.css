@@ -46,10 +46,15 @@ body {
   flex-wrap: wrap;
 }
 
-.nav-logo i {
-  color: var(--gold-light);
-  font-size: 1.6rem;
+.nav-logo-img {
+  height: 40px; /* Adjust as needed */
+  width: auto;
+  max-height: 60px;
+  display: inline-block;
+  object-fit: contain; /* Prevents distortion */
 }
+
+
 
 .nav-logo .charity-badge {
   font-size: 0.7rem;
@@ -128,9 +133,11 @@ body {
 /* ===== HERO SECTION OFFSET ===== */
 .hero {
   margin-top: 70px; /* Offset for fixed navbar */
+  
 }
 
 /* ===== RESPONSIVE NAV ===== */
+
 @media (max-width: 768px) {
   .nav-toggle {
     display: block;
@@ -145,35 +152,55 @@ body {
     width: 100%;
     background: rgba(43, 94, 75, 0.98);
     backdrop-filter: blur(10px);
-    padding: 16px 24px;
+    padding: 20px 0;
     gap: 4px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
   }
 
   .nav-links.active {
     display: flex;
   }
 
-  .nav-links li a {
-    padding: 12px 20px;
+  .nav-links li {
+    list-style: none;
     width: 100%;
-    border-radius: 12px;
-    font-size: 1.05rem;
   }
 
-  .nav-links li a[href="donate.html"] {
+  .nav-links li a {
+    display: block;
+    padding: 14px 20px;
+    width: 100%;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
     text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.3s ease;
+  }
+
+  .nav-links li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-links li:last-child a {
+    border-bottom: none;
   }
 
   .hero {
     margin-top: 60px;
   }
 
-  /* Hide charity badge on mobile */
+}
+
+
+
+  /* Hide charity badge on mobile 
   .nav-logo .charity-badge {
     display: none;
   }
-}
+}*/
 
 @media (max-width: 450px) {
   .nav-logo {
@@ -395,6 +422,16 @@ body {
 }
 
 
+/* Desktop: Use wider image */
+@media (min-width: 1024px) {
+  .hero {
+    background-image: url('images/mosque-desktop.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 80vh;
+  }
+}
+
 /* ===== FLOATING MESSAGE ===== */
 .floating-msg {
   position: fixed;
@@ -569,7 +606,7 @@ body {
   }
 }
 
-/* ===== FOOTER ===== */
+
 /* ===== FOOTER ===== */
 .footer {
   background: var(--primary);
@@ -755,7 +792,7 @@ body {
   background: linear-gradient(160deg, #f8f4ef 0%, #ece6dc 100%);
   /*border-top: 4px solid var(--gold);
   border-bottom: 4px solid var(--gold);*/
-  margin: 40px 0 0 0;
+  margin: 0;
 }
 
 .prayer-header {
@@ -1205,4 +1242,28 @@ body {
     bottom: 20px;
     right: 20px;
   }
+}
+
+
+/* ===== BACK TO HOME BUTTON ===== */
+.btn-back-home {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 12px 36px;
+  border-radius: 60px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.btn-back-home:hover {
+  background: #1f4a3a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(43, 94, 75, 0.3);
+}
+
+.btn-back-home i {
+  margin-right: 10px;
 }
