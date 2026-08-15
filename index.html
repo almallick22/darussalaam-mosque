@@ -28,6 +28,10 @@
   
   <!-- External CSS -->
   <link rel="stylesheet" href="style.css" />
+
+<!-- Netlify adentity -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 </head>
 <body>
 
@@ -290,6 +294,26 @@
 
 <!-- External JavaScript -->
   <script src="script.js"></script>
+
+
+  <!-- Netlify Identity: handle login, invitation and password recovery -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function (user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function () {
+            window.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
+
+
+
 
 </body>
 </html>
