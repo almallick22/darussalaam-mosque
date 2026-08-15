@@ -1,3 +1,26 @@
+# /*
+# backend:
+#   name: git-gateway
+#   branch: main
+
+# media_folder: "images/uploads"
+# public_folder: "/images/uploads"
+
+# collections:
+#   - name: "settings"
+#     label: "Settings"
+#     files:
+#       - file: "data.json"
+#         label: "Floating Message"
+#         name: "floating-message"
+#         fields:
+#           - label: "Floating Message"
+#             name: "floatingMessage"
+#             widget: "string"
+#             default: "Welcome to Darus Salaam Mosque"
+#             required: true 
+#             */
+
 backend:
   name: git-gateway
   branch: main
@@ -6,15 +29,51 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  # ===== SETTINGS =====
   - name: "settings"
-    label: "Settings"
+    label: "⚙️ Settings"
     files:
       - file: "data.json"
-        label: "Floating Message"
-        name: "floating-message"
+        label: "📢 Announcement Banner"
+        name: "announcement"
         fields:
-          - label: "Floating Message"
+          - label: "Announcement Text"
             name: "floatingMessage"
             widget: "string"
             default: "Welcome to Darus Salaam Mosque"
             required: true
+            hint: "This message slides across the bottom of every page."
+
+  # ===== UPDATES =====
+  - name: "updates"
+    label: "📰 Updates & Resources"
+    description: "Add a file (PDF/image) or a YouTube video. These appear on the /updates page."
+    folder: "content/updates"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Date", name: "date", widget: "datetime", required: true }
+      - { label: "Description", name: "description", widget: "text", required: true }
+
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "📄 PDF or Image (one file)", value: "file" }
+          - { label: "📹 YouTube Video", value: "video" }
+        default: "file"
+        hint: "Choose what you're adding."
+
+      - label: "Upload File (PDF or Image)"
+        name: "file"
+        widget: "file"
+        required: false
+        hint: "Upload a PDF or image (e.g., Ramadan timetable or A4 poster)"
+
+      - label: "YouTube URL"
+        name: "youtubeUrl"
+        widget: "string"
+        required: false
+        hint: "Paste the full YouTube link (e.g., https://youtube.com/watch?v=abc)"
+
