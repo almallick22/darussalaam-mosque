@@ -1,3 +1,26 @@
 {
-  "floatingMessage": "please help complete masjid construction"
+  "floatingMessage": "please help complete masjid construction",
+  "updates": [
+    {
+      "title": "Mosque Image",
+      "date": "2026-08-15T21:18:00+01:00",
+      "description": "Darussalaam Mosque",
+      "type": "file",
+      "file": "/images/uploads/mosque.png"
+    },
+    {
+      "title": "Watch Our Latest Lecture",
+      "date": "2026-08-15T20:00:00+01:00",
+      "description": "The Importance of Community in Islam",
+      "type": "video",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CiEsjW-p7Gs"
+    },
+    {
+      "title": "Ramadan Timetable 2026",
+      "date": "2026-08-10T12:00:00+01:00",
+      "description": "Download our Ramadan prayer timetable",
+      "type": "file",
+      "file": "/files/Ramadan-Timetable-2026.pdf"
+    }
+  ]
 }
