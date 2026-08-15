@@ -14,16 +14,3 @@ collections:
         name: "floating-message"
         fields:
           - { label: "Floating Message", name: "floatingMessage", widget: "string", default: "Welcome to Darus Salaam Mosque", required: true }
-
-  - name: "updates"
-    label: "Updates"
-    folder: "content/updates"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string", required: true }
-      - { label: "Date", name: "date", widget: "datetime", required: true }
-      - { label: "Description", name: "description", widget: "text", required: true }
-      - { label: "Type", name: "type", widget: "select", options: ["text", "video", "pdf"], default: "text", required: true }
-      - { label: "YouTube URL", name: "youtubeUrl", widget: "string", required: false }
-      - { label: "PDF File", name: "file", widget: "file", required: false }
