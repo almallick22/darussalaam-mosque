@@ -233,10 +233,35 @@
         card.className = 'update-card';
 
         let mediaContent = '';
-        if (item.file) {
+        let actionButton = '';
+
+        // ===== FILE (IMAGE/PDF) =====
+        if (item.type === 'file' && item.file) {
           const isImage = item.file.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i);
           if (isImage) {
             mediaContent = `<div class="image-wrapper"><img src="${item.file}" class="update-image" alt="${item.title}"></div>`;
+            actionButton = `<a href="${item.file}" target="_blank" class="btn-download"><i class="fas fa-image"></i> View Image</a>`;
+          } else {
+            actionButton = `<a href="${item.file}" download class="btn-download"><i class="fas fa-file-pdf"></i> Download PDF</a>`;
+          }
+        }
+
+        // ===== YOUTUBE VIDEO =====
+        if (item.type === 'video' && item.youtubeUrl) {
+          const videoId = extractYouTubeId(item.youtubeUrl);
+          if (videoId) {
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            mediaContent = `
+              <a href="${item.youtubeUrl}" target="_blank" class="video-link">
+                <div class="video-wrapper">
+                  <img src="${thumbnailUrl}" alt="${item.title}" class="video-thumbnail">
+                  <div class="play-button">
+                    <i class="fas fa-play-circle"></i>
+                  </div>
+                </div>
+              </a>
+            `;
+            actionButton = `<a href="${item.youtubeUrl}" target="_blank" class="btn-download"><i class="fas fa-play"></i> Watch Video</a>`;
           }
         }
 
@@ -252,8 +277,9 @@
           <div class="card-date">📅 ${formattedDate}</div>
           <h3>${item.title}</h3>
           <p>${item.description}</p>
-          ${item.file ? `<a href="${item.file}" target="_blank" class="btn-download"><i class="fas fa-image"></i> View Image</a>` : ''}
+          ${actionButton}
         `;
+
         grid.appendChild(card);
       });
 
@@ -261,6 +287,17 @@
       console.log('Error loading updates:', error);
       grid.innerHTML = `<div class="no-updates"><i class="fas fa-newspaper"></i> No updates yet.</div>`;
     }
+  }
+
+  // Helper function to extract YouTube video ID
+  function extractYouTubeId(url) {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    if (match && match[2].length === 11) {
+      return match[2];
+    }
+    return null;
   }
 
   // Load updates when page loads
