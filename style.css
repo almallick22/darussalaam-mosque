@@ -1267,3 +1267,20 @@ body {
 .btn-back-home i {
   margin-right: 10px;
 }
+
+
+
+.image-wrapper {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f5f0eb;
+}
+
+.update-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 300px;
+}
