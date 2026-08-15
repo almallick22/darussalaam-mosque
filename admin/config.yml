@@ -13,4 +13,8 @@ collections:
         label: "Floating Message"
         name: "floating-message"
         fields:
-          - { label: "Floating Message", name: "floatingMessage", widget: "string", default: "Welcome to Darus Salaam Mosque", required: true }
+          - label: "Floating Message"
+            name: "floatingMessage"
+            widget: "string"
+            default: "Welcome to Darus Salaam Mosque"
+            required: true
