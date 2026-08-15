@@ -9,47 +9,8 @@
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    CMS.init({
-      config: {
-        backend: {
-          name: 'git-gateway',
-          branch: 'main',
-        },
-        media_folder: 'images/uploads',
-        public_folder: '/images/uploads',
-        collections: [
-          {
-            name: 'settings',
-            label: 'Settings',
-            files: [
-              {
-                file: 'data.json',
-                label: 'Floating Message',
-                name: 'floating-message',
-                fields: [
-                  { label: 'Floating Message', name: 'floatingMessage', widget: 'string', default: 'Welcome to Darus Salaam Mosque', required: true }
-                ]
-              }
-            ]
-          },
-          {
-            name: 'updates',
-            label: 'Updates',
-            folder: 'content/updates',
-            create: true,
-            slug: '{{slug}}',
-            fields: [
-              { label: 'Title', name: 'title', widget: 'string', required: true },
-              { label: 'Date', name: 'date', widget: 'datetime', required: true },
-              { label: 'Description', name: 'description', widget: 'text', required: true },
-              { label: 'Type', name: 'type', widget: 'select', options: ['text', 'video', 'pdf'], default: 'text', required: true },
-              { label: 'YouTube URL', name: 'youtubeUrl', widget: 'string', required: false },
-              { label: 'PDF File', name: 'file', widget: 'file', required: false }
-            ]
-          }
-        ]
-      }
-    });
+    // CMS will load config from admin/config.yml
+    CMS.init();
   </script>
 </body>
 </html>
